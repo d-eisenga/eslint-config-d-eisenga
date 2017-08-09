@@ -1,5 +1,8 @@
 {
   "name": "eslint-config-d-eisenga",
   "version": "0.0.1",
-  "main": ".eslintrc.yml"
+  "main": ".eslintrc.yml",
+  "peerDependencies": {
+    "eslint": "4.x"
+  }
 }
