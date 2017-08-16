@@ -183,7 +183,10 @@ rules:
   block-spacing: 2                      # enforce consistent spacing inside single-line blocks
   brace-style: 2                        # enforce consistent brace style for blocks
   camelcase: 2                          # enforce camelcase naming convention
-  capitalized-comments: 2               # enforce or disallow capitalization of the first letter of a comment
+  capitalized-comments:                 # enforce or disallow capitalization of the first letter of a comment
+    - 2
+    - always
+    - ignoreConsecutiveComments: true
   comma-dangle:                         # require or disallow trailing commas
     - 2
     - always-multiline
