@@ -1,1 +1,1 @@
-This is my eslint config for eslint 4.x
+This is my eslint config for eslint 5.x

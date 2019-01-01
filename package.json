@@ -3,6 +3,6 @@
   "version": "0.0.1",
   "main": ".eslintrc.yml",
   "peerDependencies": {
-    "eslint": "4.x"
+    "eslint": "^5.11.0"
   }
 }

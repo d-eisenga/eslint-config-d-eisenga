@@ -1,8 +1,7 @@
 parserOptions:
-  ecmaVersion: 2017
+  ecmaVersion: 2018
   sourceType: module
 env:
-  node: true
   es6: true
 rules:
 
@@ -12,6 +11,7 @@ rules:
   # ================================================================================================
   for-direction: 2                      # enforce “for” loop update clause moving the counter in the right direction.
   getter-return: 2                      # enforce `return` statements in getters
+  no-async-promise-executor: 2          # disallow using an async function as a Promise executor
   no-await-in-loop: 2                   # disallow `await` inside of loops
   no-compare-neg-zero: 2                # disallow comparing against -0
   no-cond-assign:                       # disallow assignment operators in conditional expressions
@@ -35,19 +35,20 @@ rules:
   no-extra-semi: 2                      # disallow unnecessary semicolons
   no-func-assign: 2                     # disallow reassigning `function` declarations
   no-inner-declarations: 2              # disallow variable or `function` declarations in nested blocks
-  no-invalid-regexp: 2                  # disallow invalid regular expression strings in `RegExp`  constructors
-  no-irregular-whitespace: 2            # disallow irregular whitespace outside of strings and comments
+  no-invalid-regexp: 2                  # disallow invalid regular expression strings in `RegExp` constructors
+  no-irregular-whitespace: 2            # disallow irregular whitespace
+  no-misleading-character-class: 2      # disallow characters which are made with multiple code points in character class syntax
   no-obj-calls: 2                       # disallow calling global object properties as functions
   no-prototype-builtins: 2              # disallow calling some `Object.prototype` methods directly on objects
   no-regex-spaces: 2                    # disallow multiple spaces in regular expressions
   no-sparse-arrays: 2                   # disallow sparse arrays
   no-template-curly-in-string: 1        # disallow template literal placeholder syntax in regular strings
   no-unexpected-multiline: 2            # disallow confusing multiline expressions
-  no-unreachable: 2                     # disallow unreachable code after `return`, `throw`,  `continue`, and `break` statements
+  no-unreachable: 2                     # disallow unreachable code after `return`, `throw`, `continue`, and `break` statements
   no-unsafe-finally: 2                  # disallow control flow statements in `finally` blocks
   no-unsafe-negation: 2                 # disallow negating the left operand of relational operators
+  require-atomic-updates: 2             # disallow assignments that can lead to race conditions due to usage of `await` or `yield`
   use-isnan: 2                          # require calls to `isNaN()` when checking for `NaN`
-  valid-jsdoc: 2                        # enforce valid JSDoc comments
   valid-typeof: 2                       # enforce comparing `typeof` expressions against valid strings
 
   # ================================================================================================
@@ -66,11 +67,12 @@ rules:
   dot-notation: 2                       # enforce dot notation whenever possible
   eqeqeq: 2                             # require the use of `===` and `!==`
   guard-for-in: 2                       # require `for-in` loops to include an `if` statement
+  max-classes-per-file: 2               # enforce a maximum number of classes per file
   no-alert: 1                           # disallow the use of `alert`, `confirm`, and `prompt`
-  no-caller: 2                          # disallow the use of `arguments.caller` or  `arguments.callee`
+  no-caller: 2                          # disallow the use of `arguments.caller` or `arguments.callee`
   no-case-declarations: 2               # disallow lexical declarations in case clauses
   no-div-regex: 0                       # disallow division operators explicitly at the beginning of regular expressions
-  no-else-return: 2                     # disallow `else` blocks after `return` statements in `if`  statements
+  no-else-return: 2                     # disallow `else` blocks after `return` statements in `if` statements
   no-empty-function: 2                  # disallow empty functions
   no-empty-pattern: 2                   # disallow empty destructuring patterns
   no-eq-null: 2                         # disallow `null` comparisons without type-checking operators
@@ -101,7 +103,7 @@ rules:
   no-multi-str: 2                       # disallow multiline strings
   no-new: 2                             # disallow `new` operators outside of assignments or comparisons
   no-new-func: 2                        # disallow `new` operators with the `Function` object
-  no-new-wrappers: 2                    # disallow `new` operators with the `String`, `Number`, and  `Boolean` objects
+  no-new-wrappers: 2                    # disallow `new` operators with the `String`, `Number`, and `Boolean` objects
   no-octal: 2                           # disallow octal literals
   no-octal-escape: 2                    # disallow octal escape sequences in string literals
   no-param-reassign: 2                  # disallow reassigning `function` parameters
@@ -119,6 +121,7 @@ rules:
   no-unused-expressions: 2              # disallow unused expressions
   no-unused-labels: 2                   # disallow unused labels
   no-useless-call: 2                    # disallow unnecessary calls to `.call()` and `.apply()`
+  no-useless-catch: 2                   # disallow unnecessary `catch` clauses
   no-useless-concat: 2                  # disallow unnecessary concatenation of literals or template literals
   no-useless-escape: 2                  # disallow unnecessary escape characters
   no-useless-return: 2                  # disallow redundant return statements
@@ -128,6 +131,7 @@ rules:
   prefer-promise-reject-errors: 2       # require using Error objects as Promise rejection reasons
   radix: 2                              # enforce the consistent use of the radix argument when using `parseInt()`
   require-await: 2                      # disallow async functions which have no `await` expression
+  require-unicode-regexp: 0             # enforce the use of `u` flag on RegExp
   vars-on-top: 0                        # require `var` declarations be placed at the top of their containing scope
   wrap-iife:                            # require parentheses around immediate `function` invocations
     - 2
@@ -142,14 +146,13 @@ rules:
 
   # ================================================================================================
   # Variables
-  # These rules relate to variable declarations:
+  # These rules relate to variable declarations
   # ================================================================================================
   init-declarations: 0                  # require or disallow initialization in variable declarations
-  no-catch-shadow: 0                    # disallow `catch` clause parameters from shadowing variables in the outer scope
   no-delete-var: 2                      # disallow deleting variables
   no-label-var: 2                       # disallow labels that share a name with a variable
   no-restricted-globals: 0              # disallow specified global variables
-  no-shadow: 2                          # disallow variable declarations from shadowing variables declared in the outer scope
+  no-shadow: 0                          # disallow variable declarations from shadowing variables declared in the outer scope
   no-shadow-restricted-names: 2         # disallow identifiers from shadowing restricted names
   no-undef: 2                           # disallow the use of undeclared variables unless mentioned in `/*global */` comments
   no-undef-init: 0                      # disallow initializing variables to `undefined`
@@ -164,12 +167,12 @@ rules:
   callback-return: 2                    # require `return` statements after callbacks
   global-require: 2                     # require `require()` calls to be placed at top-level module scope
   handle-callback-err: 2                # require error handling in callbacks
-  no-buffer-constructor: 2              # disallow use of the Buffer() constructor
+  no-buffer-constructor: 2              # disallow use of the `Buffer()` constructor
   no-mixed-requires: 2                  # disallow `require` calls to be mixed with regular variable declarations
   no-new-require: 2                     # disallow `new` operators with calls to `require`
-  no-path-concat: 2                     # disallow string concatenation with `__dirname` and  `__filename`
-  no-process-env: 2                     # disallow the use of `process.env`
-  no-process-exit: 2                    # disallow the use of `process.exit()`
+  no-path-concat: 2                     # disallow string concatenation with `__dirname` and `__filename`
+  no-process-env: 0                     # disallow the use of `process.env`
+  no-process-exit: 0                    # disallow the use of `process.exit()`
   no-restricted-modules: 0              # disallow specified modules when loaded by `require`
   no-sync: 2                            # disallow synchronous methods
 
@@ -177,10 +180,12 @@ rules:
   # Stylistic Issues
   # These rules relate to style guidelines, and are therefore quite subjective
   # ================================================================================================
-  array-bracket-newline: 2              # enforce linebreaks after opening and before closing array brackets
+  array-bracket-newline:                # enforce linebreaks after opening and before closing array brackets
+    - 2
+    - consistent
   array-bracket-spacing: 2              # enforce consistent spacing inside array brackets
   array-element-newline: 0              # enforce line breaks after each array element
-  block-spacing: 2                      # enforce consistent spacing inside single-line blocks
+  block-spacing: 2                      # disallow or enforce spaces inside of blocks after opening block and before closing block
   brace-style: 2                        # enforce consistent brace style for blocks
   camelcase: 2                          # enforce camelcase naming convention
   capitalized-comments:                 # enforce or disallow capitalization of the first letter of a comment
@@ -198,10 +203,12 @@ rules:
   func-call-spacing: 2                  # require or disallow spacing between function identifiers and their invocations
   func-name-matching: 2                 # require function names to match the name of the variable or property to which they are assigned
   func-names: 2                         # require or disallow named `function` expressions
-  func-style: 2                         # enforce the consistent use of either `function`  declarations or expressions
+  func-style: 2                         # enforce the consistent use of either `function` declarations or expressions
+  function-paren-newline: 2             # enforce consistent line breaks inside function parentheses
   id-blacklist: 0                       # disallow specified identifiers
   id-length: 0                          # enforce minimum and maximum identifier lengths
   id-match: 0                           # require identifiers to match a specified regular expression
+  implicit-arrow-linebreak: 0           # enforce the location of arrow function bodies
   indent:                               # enforce consistent indentation
     - 2
     - 2
@@ -212,6 +219,7 @@ rules:
   line-comment-position: 0              # enforce position of line comments
   linebreak-style: 2                    # enforce consistent linebreak style
   lines-around-comment: 0               # require empty lines around comments
+  lines-between-class-members: 2        # require or disallow an empty line between class members
   max-depth: 0                          # enforce a maximum depth that blocks can be nested
   max-len:                              # enforce a maximum line length
     - 2
@@ -221,12 +229,14 @@ rules:
       ignoreTemplateLiterals: true
       ignoreRegExpLiterals: true
   max-lines: 0                          # enforce a maximum number of lines per file
+  max-lines-per-function: 2             # enforce a maximum number of line of code in a function
   max-nested-callbacks:                 # enforce a maximum depth that callbacks can be nested
     - 2
     - 3
   max-params: 0                         # enforce a maximum number of parameters in function definitions
   max-statements: 0                     # enforce a maximum number of statements allowed in function blocks
   max-statements-per-line: 2            # enforce a maximum number of statements allowed per line
+  multiline-comment-style: 0            # enforce a particular style for multiline comments
   multiline-ternary:                    # enforce newlines between operands of ternary expressions
     - 2
     - always-multiline
@@ -237,7 +247,7 @@ rules:
   no-bitwise: 2                         # disallow bitwise operators
   no-continue: 2                        # disallow `continue` statements
   no-inline-comments: 0                 # disallow inline comments after code
-  no-lonely-if: 2                       # disallow `if` statements as the only statement in `else`  blocks
+  no-lonely-if: 2                       # disallow `if` statements as the only statement in `else` blocks
   no-mixed-operators: 0                 # disallow mixed binary operators
   no-mixed-spaces-and-tabs: 2           # disallow mixed spaces and tabs for indentation
   no-multi-assign: 0                    # disallow use of chained assignment expressions
@@ -257,7 +267,7 @@ rules:
   object-curly-newline: 2               # enforce consistent line breaks inside braces
   object-curly-spacing:                 # enforce consistent spacing inside braces
     - 2
-    - always
+    - never
   object-property-newline: 0            # enforce placing object properties on separate lines
   one-var:                              # enforce variables to be declared either together or separately in functions
     - 2
@@ -267,6 +277,7 @@ rules:
   operator-linebreak: 2                 # enforce consistent linebreak style for operators
   padded-blocks: 0                      # require or disallow padding within blocks
   padding-line-between-statements: 0    # require or disallow padding lines between statements
+  prefer-object-spread: 2               # disallow using Object.assign with an object literal as the first argument and prefer the use of object spread instead.
   quote-props:                          # require quotes around object literal property names
     - 2
     - as-needed
@@ -275,7 +286,6 @@ rules:
     - 2
     - single
     - avoidEscape: true
-  require-jsdoc: 0                      # require JSDoc comments
   semi: 2                               # require or disallow semicolons instead of ASI
   semi-spacing: 2                       # enforce consistent spacing before and after semicolons
   semi-style: 2                         # enforce location of semicolons
@@ -319,7 +329,7 @@ rules:
   no-useless-rename: 2                  # disallow renaming import, export, and destructured assignments to the same name
   no-var: 2                             # require `let` or `const` instead of `var`
   object-shorthand: 2                   # require or disallow method and property shorthand syntax for object literals
-  prefer-arrow-callback: 2              # require arrow functions as callbacks
+  prefer-arrow-callback: 2              # require using arrow functions for callbacks
   prefer-const: 2                       # require `const` declarations for variables that are never reassigned after declared
   prefer-destructuring: 2               # require destructuring from arrays and/or objects
   prefer-numeric-literals: 2            # disallow `parseInt()` and `Number.parseInt()` in favor of binary, octal, and hexadecimal literals
@@ -331,4 +341,4 @@ rules:
   sort-imports: 0                       # enforce sorted import declarations within modules
   symbol-description: 2                 # require symbol descriptions
   template-curly-spacing: 0             # require or disallow spacing around embedded expressions of template strings
-  yield-star-spacing: 2                 # require or disallow spacing around the `*` in `yield*`  expressions
+  yield-star-spacing: 2                 # require or disallow spacing around the `*` in `yield*` expressions`
